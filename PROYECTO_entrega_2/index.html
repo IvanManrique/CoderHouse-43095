@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Form</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Credit Form</h1>
+    <form id="creditForm">
+        <div>
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="id">Identificación:</label>
+          <input type="text" id="id" name="id" required>
+      </div>
+      <div>
+        <label for="tel">Tel&eacute;fono:</label>
+        <input type="number" id="tel" name="tel" required>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" required>
+  </div>
+        <div>
+            <label for="creditAmount">Monto a financiar:</label>
+            <input type="number" id="creditAmount" name="creditAmount" required>
+        </div>
+        <div>
+            <label for="interestRate">Tasa de inter&eacute;s:</label>
+            <input type="radio" id="interestRate1" name="interestRate" value="7.8" checked>
+            <label for="interestRate1">Veh&iacute;culo</label>
+
+            <input type="radio" id="interestRate2" name="interestRate" value="11.5">
+            <label for="interestRate2">Hipotecario</label>
+
+            <input type="radio" id="interestRate3" name="interestRate" value="12.2">
+            <label for="interestRate3">Libre inversi&oacute;n</label>
+        </div>
+        <div>
+            <label for="creditTerm">Credit Term:</label>
+            <select id="creditTerm" name="creditTerm">
+                <option value="3">3 meses</option>
+                <option value="6">6 meses</option>
+                <option value="12">12 meses</option>
+            </select>
+        </div>
+        <div>
+            <input type="submit" value="Enviar">
+        </div>
+    </form>
+    
+    <script src="main.js"></script>
+</body>
+</html>
