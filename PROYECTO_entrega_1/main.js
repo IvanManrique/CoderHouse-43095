@@ -1,31 +1,49 @@
-document.getElementById("formulario").addEventListener("submit", function(event) {
-    event.preventDefault();
-  
-    var monto = parseFloat(document.getElementById("monto").value);
-    var tasaInteres = document.getElementById("tasaInteres").value;
-    var plazo = parseInt(document.getElementById("plazo").value);
-  
-    if (isNaN(monto)) {
-        alert('Por favor ingrese un número válido'); // Alerta si no es un númer o
-        return; // Detiene el script si el valor no es válido
-      }
-    
-      if (isNaN(tasaInteres)) {
-          alert('Por favor ingrese un número válido'); // Alerta si no es un número
-        return; // Detiene el script si el valor no es válido
-      }
-    
-      if (isNaN(plazo)) {
-          alert('Por favor ingrese un número válido'); // Alerta si no es un número
-        return; // Detiene el script si el valor no es válido
-      }
-  
-    if (!tasaInteres.includes('%')) { // Valida si contiene %
-      tasaInteres += '%'; // Si no lo contiene, lo agrega al final del string
+document.getElementById("edad").addEventListener("input", function() {
+  if (this.value.length > 2) {
+    var edad = parseInt(this.value);
+    if (isNaN(edad) || edad <= 18 || edad >= 84) {
+      alert("Debes tener entre 18 y 84 años para solicitar el crédito");
     }
-  
-    var tasaMensual = parseFloat(tasaInteres) / 100 / 12; //  Convierte tasaInteres en número con parseFloat
-    var cuotaMensual = (monto * tasaMensual) / (1 - Math.pow(1 + tasaMensual, -plazo));
-  
-    alert("Su cuota mensual es: $" + cuotaMensual.toFixed(2));
-  });
+  }
+});
+
+document.getElementById("ciudad").addEventListener("change", function() {
+  var ciudad = this.value;
+  console.log(ciudad);
+});
+
+document.getElementById("telefono").addEventListener("change", function() {
+  var telefono = parseInt(this.value);
+  console.log(telefono);
+});
+
+document.getElementById("formulario").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  var name = document.getElementById("name").value;
+  var ciudad = document.getElementById("ciudad").value;
+  var monto = parseFloat(document.getElementById("monto").value);
+  var interes = parseFloat(document.querySelector('input[name="interes"]:checked').value);
+  var plazo = parseInt(document.getElementById("plazo").value);
+
+  var interesMensual = interes / 100 / 12;
+  var plazo = plazo;
+  var cuotaMensual = (monto * interesMensual) / (1 - Math.pow(1 + interesMensual, -plazo));
+  cuotaMensual = cuotaMensual.toFixed(2);
+
+  var resultElement = document.getElementById("resultado");
+  resultElement.textContent = name + ", tu cuota mensual es: $" + cuotaMensual + " a un plazo de " + plazo + " meses, con un interés fijo de " + interes + "%, recuerde que esta oferta solo es válida para la ciuad de " + ciudad;
+
+  document.getElementById("formulario").reset();
+});
+
+function sendEmail(name, ciudad) {
+  var mensaje = name + ", tu cuota mensual es: $" + cuotaMensual + " a un plazo de " + plazo + " meses, con un interés fijo de " + interes + "%, recuerde que esta oferta solo es válida para la ciuad de " + ciudad;"\n\n";
+  mensaje += "Nombre: " + name + "\n";
+  mensaje += "Ciudad: " + ciudad + "\n";
+
+  // Simulación en la consola de como se vería el correo enviado
+  console.log("Correo enviado a: " + email);
+  console.log("Asunto: Solicitud de crédito. Financiera 'El Exprimidor'");
+  console.log("Mensaje:\n" + mensaje);
+}
