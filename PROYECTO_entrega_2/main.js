@@ -1,22 +1,22 @@
 document.getElementById("edad").addEventListener("input", function() {
-  if (this.value.length > 2) {
+  if (this.value.length > 2) { //PErmite que el usuario ingrese los dos digitos de su edad antes de mostrar la alerta
     var edad = parseInt(this.value);
-    if (isNaN(edad) || edad <= 18 || edad >= 84) {
+    if (isNaN(edad) || edad <= 18 || edad >= 84) { // Valida que la edad del usuario sea un número y esté entre 18 y 84 años
       alert("Debes tener entre 18 y 84 años para solicitar el crédito");
     }
   }
 });
 
 var ciudad;
-document.getElementById("ciudad").addEventListener("change", function() {
+document.getElementById("ciudad").addEventListener("change", function() { // Captura la ciudad seleccionada en el dropdown
   ciudad = this.value;
   console.log(ciudad);
 });
 
 document.getElementById("telefono").addEventListener("input", function() {
   var telefono = this.value;
-  var isValid = /^\d+$/.test(telefono);
-  if (!isValid || telefono.length > 10) {
+  var isValid = /^\d+$/.test(telefono); // Valida que el número de teléfono no tenga caracteres especiales
+  if (!isValid || telefono.length > 10) { // Valida que el n{umero de teléfono tenga máximo 10 digitos
     alert("Por favor ingrese los 10 dígitos de su número de teléfono sin caracteres especiales como +, *, /, #");
     this.value = "";
   } else {
@@ -25,7 +25,7 @@ document.getElementById("telefono").addEventListener("input", function() {
   }
 });
 
-function enviarFormulario(event) {
+function enviarFormulario(event) { // Función para traer los datos del formulario y calcular los pagos mensuales
   event.preventDefault();
 
   var name = document.getElementById("name").value;
