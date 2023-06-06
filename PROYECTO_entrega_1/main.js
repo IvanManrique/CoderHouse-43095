@@ -31,8 +31,8 @@ document.getElementById("formulario").addEventListener("submit", function(event)
   var cuotaMensual = (monto * interesMensual) / (1 - Math.pow(1 + interesMensual, -plazo));
   cuotaMensual = cuotaMensual.toFixed(2);
 
-  var resultElement = document.getElementById("resultado");
-  resultElement.textContent = name + ", tu cuota mensual es: $" + cuotaMensual + " a un plazo de " + plazo + " meses, con un interés fijo de " + interes + "%, recuerde que esta oferta solo es válida para la ciuad de " + ciudad;
+  var resultadoCuotas = document.getElementById("resultado");
+  resultadoCuotas.textContent = name + ", tu cuota mensual es: $" + cuotaMensual + " a un plazo de " + plazo + " meses, con un interés fijo de " + interes + "%, recuerde que esta oferta solo es válida para la ciuad de " + ciudad;
 
   document.getElementById("formulario").reset();
 });

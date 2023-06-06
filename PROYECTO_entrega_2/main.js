@@ -1,5 +1,5 @@
 document.getElementById("edad").addEventListener("input", function() {
-  if (this.value.length > 2) { //PErmite que el usuario ingrese los dos digitos de su edad antes de mostrar la alerta
+  if (this.value.length > 2) { //Permite que el usuario ingrese los dos digitos de su edad antes de mostrar la alerta
     var edad = parseInt(this.value);
     if (isNaN(edad) || edad <= 18 || edad >= 84) { // Valida que la edad del usuario sea un número y esté entre 18 y 84 años
       alert("Debes tener entre 18 y 84 años para solicitar el crédito");
@@ -54,8 +54,8 @@ function enviarFormulario(event) { // Función para traer los datos del formular
   var cuotaMensual = (monto * interesMensual) / (1 - Math.pow(1 + interesMensual, -plazos));
   cuotaMensual = cuotaMensual.toFixed(2);
 
-  var resultElement = document.getElementById("resultado");
-  resultElement.textContent = name + ", tu cuota mensual es: $" + cuotaMensual + " a un plazo de " + plazo + " meses, con un interés fijo de " + interes + "%, recuerda que esta oferta solo es válida para la ciudad de " + ciudad;
+  var resultadoCuotas = document.getElementById("resultado");
+  resultadoCuotas.textContent = name + ", tu cuota mensual es: $" + cuotaMensual + " a un plazo de " + plazo + " meses, con un interés fijo de " + interes + "%, recuerda que esta oferta solo es válida para la ciudad de " + ciudad;
 
   document.getElementById("formulario").reset();
 }
