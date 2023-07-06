@@ -72,3 +72,50 @@ ul {
     list-style-type: square;
     padding-left: 20px;
 }
+/* Add this CSS code to your "style.css" file or in a <style> tag */
+
+/* Center the modal vertically and horizontally */
+.modal {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Set the width of the modal */
+.modal-dialog {
+  width: 400px;
+}
+
+/* Customize the modal header */
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: none;
+}
+
+/* Customize the modal title */
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Customize the modal body */
+.modal-body {
+  padding: 20px;
+}
+
+/* Customize the close button */
+.modal-header .btn-close {
+  color: #333;
+  font-size: 1.5rem;
+}
+
+/* Style the result container */
+#resultado {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #333;
+}

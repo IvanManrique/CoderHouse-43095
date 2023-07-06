@@ -1,16 +1,16 @@
-let ciudad;
+let ciudad = "Bogotá";
 let diferenciaAnios;
 let edad;
 
 document.getElementById("ciudad").addEventListener("change", function() {
-  ciudad = this.value;
+  ciudad = this.value || "Bogotá";
   console.log(ciudad);
 });
 
 document.getElementById("telefono").addEventListener("input", function() {
   let telefono = this.value;
   let isValid = /^\d+$/.test(telefono);
-  
+
   if (!isValid || telefono.length > 10) {
     document.getElementById("resultado").textContent = "Por favor ingrese los 10 dígitos de su número de teléfono sin caracteres especiales como +, *, /, #";
     this.value = "";
@@ -42,14 +42,12 @@ function enviarFormulario(event) {
   let telefono = parseInt(document.getElementById("telefono").value);
   let plazo = parseInt(document.getElementById("plazo").value);
 
-  let crearArray = [];
-
-  let camposForm = document.getElementById("formulario").getElementsByTagName("input");
-  for (let i = 0; i < camposForm.length; i++) {
-    let campoNombre = camposForm[i].name;
-    let campoValor = camposForm[i].value;
-    crearArray.push({ name: campoNombre, value: campoValor });
-  }
+  let crearArray = Array.from(document.getElementById("formulario").querySelectorAll("input")).map((input) => {
+    return {
+      name: input.name,
+      value: input.value
+    };
+  });
 
   console.log("Array Creado:");
   crearArray.forEach(function (field) {
@@ -64,44 +62,9 @@ function enviarFormulario(event) {
   let resultadoCuotas = document.getElementById("resultado");
   resultadoCuotas.textContent = `${name}, tu cuota mensual es: $${cuotaMensual} a un plazo de ${plazo} meses, con un interés fijo de ${interes}%, recuerda que esta oferta solo es válida para la ciudad de ${ciudad}`;
 
-  document.getElementById("formulario").reset();
+  let resultadoModal = new bootstrap.Modal(document.getElementById("resultadoModal"));
+  resultadoModal.show();
 }
-
-function guardarDatos() {
-  let documentoID = document.getElementById("documentoID").value;
-  let email = document.getElementById("email").value;
-
-  if (!validarDocumentoID(documentoID)) {
-    document.getElementById("resultado").textContent = "Por favor ingrese una identificación válida";
-    return;
-  }
-
-  if (!validarEmail(email)) {
-    document.getElementById("resultado").textContent = "Por favor ingrese un correo válido";
-    return;
-  }
-
-  let storedDocumentoID = localStorage.getItem("documentoID");
-  let storedEmail = localStorage.getItem("email");
-
-  if (storedDocumentoID === documentoID || storedEmail === email) {
-    document.getElementById("resultado").textContent = "Usted ya ha solicitado un crédito, por favor espere la llamada de nuestro asesor.";
-    return;
-  }
-
-  localStorage.setItem("documentoID", documentoID);
-  localStorage.setItem("email", email);
-}
-
-function validarDocumentoID(documentoID) {
-  return /^\d{10}$/.test(documentoID);
-}
-
-function validarEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-guardarDatos();
 
 const validarEdad = (edad) => {
   if (edad < 18 || edad > 84) {
@@ -122,7 +85,7 @@ const mensajeExitoso = (event) => {
     title: 'Enviar datos?',
     text: 'Al enviar los datos, usted acepta nuestros términos y condiciones!',
     icon: 'info',
-    showCancelButton: true,
+    showCancelButton:true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Enviar'
@@ -133,8 +96,8 @@ const mensajeExitoso = (event) => {
         'Nuestros asesores se comunicarán pronto'
       );
       enviarFormulario(event);
-      let resultadoCuotas = document.getElementById("resultado");
-      console.log(resultadoCuotas.textContent); // Display resultadoCuotas.context in the console
+      let resultadoCuotas = document.getElementById("resultado"); //Mostrar resultado en HTML
+      console.log(resultadoCuotas.textContent); // Mostrar resultado en la consola
     }
   });
 };
@@ -148,3 +111,5 @@ document.getElementById('formulario').addEventListener('submit', function(event)
     mensajeExitoso(event);
   }
 });
+
+document.getElementById("formulario").reset();
