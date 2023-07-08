@@ -12,7 +12,7 @@ document.getElementById("telefono").addEventListener("input", function() {
   let telefono = this.value;
   let isValid = /^\d+$/.test(telefono);
 
-  if (!isValid || telefono.length > 10) {
+  if (!isValid || telefono.length > 10) { // Valida que el número de teléfono tenga formato correcto
     document.getElementById("resultado").textContent = "Por favor ingrese los 10 dígitos de su número de teléfono sin caracteres especiales como +, *, /, #";
     this.value = "";
   } else {
@@ -21,7 +21,7 @@ document.getElementById("telefono").addEventListener("input", function() {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() { //Ajusta els elector de fecha en el HTML
     const datePicker = document.getElementById('datePicker');
     const fechaActual = new Date(); // Trae la fecha actual
     fechaActual.setFullYear(fechaActual.getFullYear() - 18); // Resta 18 años
@@ -90,7 +90,7 @@ const validarEdad = (edad) => { // valida la edad del usuario, si no está dentr
   return true;
 };
 
-function validarDocumentoID(documentoID) {//Valida el formato de documento
+function validarDocumentoID(documentoID) {//Valida el formato de documento de identidad
   return /^\d{10}$/.test(documentoID);
 }
 
@@ -147,7 +147,7 @@ const mensajeExitoso = (event) => {
     if (result.isConfirmed) {
       guardarDatos().then(() => {
         enviarFormulario(event);
-        let resultadoCuotas = document.getElementById("resultado"); // Pinta el resultado en HTML
+        let resultadoCuotas = document.getElementById("resultado"); // Pinta el resultado en HTML. Incluí esta líné adado que swal.fire genera un error en el siguiente .catch((error) que no pude solucionar XD
         console.log(resultadoCuotas.textContent); // Pinta el resultado en la consola
         
         Swal.fire(
@@ -155,7 +155,7 @@ const mensajeExitoso = (event) => {
           'Nuestros asesores se comunicarán pronto',
           'success'
         );
-      }).catch((error) => {
+      }).catch((error) => { //
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
