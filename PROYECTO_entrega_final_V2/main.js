@@ -70,8 +70,8 @@ const validarEdad = (edad) => {
   if (edad < 18 || edad > 84) {
     document.getElementById("resultado").textContent = "Debe tener entre 18 y 84 años para solicitar el crédito";
     Swal.fire({
-      icon: 'warning',
-      title: 'Sus datos no pueden ser enviados',
+      icon: 'error',
+      title: 'Oops...',
       text: 'Debe tener entre 18 y 84 años para solicitar el crédito',
       footer: '<a href="legal.html">Ver términos y condiciones</a>'
     });
@@ -139,8 +139,8 @@ const mensajeExitoso = (event) => {
     if (result.isConfirmed) {
       guardarDatos().then(() => {
         enviarFormulario(event);
-        let resultadoCuotas = document.getElementById("resultado"); // Mostrar resultados en HTML
-        console.log(resultadoCuotas.textContent); // Mostrar resultados en la consola
+        let resultadoCuotas = document.getElementById("resultado"); // Show result in HTML
+        console.log(resultadoCuotas.textContent); // Show result in the console
         
         Swal.fire(
           'Datos enviados',
@@ -171,3 +171,55 @@ document.getElementById('formulario').addEventListener('submit', function(event)
 });
 
 document.getElementById("formulario").reset();
+
+fetch("http://localhost:3000/info_trading")
+  .then(local => local.json())
+  .then(informacion => {
+    let resultadoAPI = "";
+
+    informacion.forEach(item => {
+        resultadoAPI += `<div class="col-md-3">
+          <div class="card">
+            <div class="card-header">${item.moneda}</div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">`;
+      
+        
+        const campo = ['ultimo', 'apertura', 'maximo', 'minimo', 'var', 'var_perc', 'fecha']; // Trae el campo
+        campo.forEach(campo => {
+          const contenido = item[campo]; // Trae el contenido del campo
+          resultadoAPI += `<p>${campo}: ${contenido}</p>`;
+        });
+      
+        resultadoAPI += `</blockquote>
+            </div>
+          </div>
+        </div>`;
+      });
+
+    console.log(informacion);
+    document.getElementById("jsonLocal").innerHTML = resultadoAPI;
+  });
+
+  /*fetch("https://jsonplaceholder.typicode.com/posts")
+  .then(respuesta => respuesta.json())
+  .then(datos => {
+    let salida = "";
+
+    datos.forEach(item => {
+      salida += `<div class="col-md-3">
+        <div class="card">
+          <div class="card-header">${item.title}</div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>${item.body}</p>
+            </blockquote>
+          </div>
+        </div>
+      </div>`;
+    });
+
+    console.log(datos);
+    document.getElementById("json").innerHTML = salida;
+  });*/
+

@@ -1,0 +1,114 @@
+{ 
+    "info_trading": [
+      {
+        "id": 1,
+        "moneda": "EUR/USD",
+        "ultimo": "1.0969",
+        "apertura": "1.0886",
+        "maximo": "1.0974",
+        "minimo": "1.0867",
+        "var": "+0.0082",
+        "var_perc": "+0.75%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 2,
+        "moneda": "GBP/USD",
+        "ultimo": "1.2838",
+        "apertura": "1.0886",
+        "maximo": "1.2850",
+        "minimo": "1.2726",
+        "var": "+0.0098",
+        "var_perc": "+0.77%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 3,
+        "moneda": "USD/JPY",
+        "ultimo": "142.09",
+        "apertura": "144.06",
+        "maximo": "144.20",
+        "minimo": "142.07",
+        "var": "-1.98",
+        "var_perc": "-1.37%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 4,
+        "moneda": "AUD/USD",
+        "ultimo": "0.6690",
+        "apertura": "0.6620",
+        "maximo": "0.6701",
+        "minimo": "0.6618",
+        "var": "+0.0065",
+        "var_perc": "+0.98%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 5,
+        "moneda": "EUR/GBP",
+        "ultimo": "0.8543",
+        "apertura": "0.8548",
+        "maximo": "0.8554",
+        "minimo": "0.8517",
+        "var": "-0.0005",
+        "var_perc": "-0.06%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 6,
+        "moneda": "USD/CAD",
+        "ultimo": "1.3275",
+        "apertura": "1.3366",
+        "maximo": "1.3387",
+        "minimo": "1.3266",
+        "var": "-0.0092",
+        "var_perc": "-0.69%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 7,
+        "moneda": "NZD/USD",
+        "ultimo": "0.6211",
+        "apertura": "0.6151",
+        "maximo": "0.6220",
+        "minimo": "0.6153",
+        "var": "+0.0056",
+        "var_perc": "+0.91%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 8,
+        "moneda": "EUR/JPY",
+        "ultimo": "155.89",
+        "apertura": "156.89",
+        "maximo": "156.96",
+        "minimo": "155.39",
+        "var": "-1.00",
+        "var_perc": "-0.64%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 9,
+        "moneda": "USD/BRL",
+        "ultimo": "4.8725",
+        "apertura": "4.9187",
+        "maximo": "4.9325",
+        "minimo": "4.8478",
+        "var": "-0.0468",
+        "var_perc": "-0.95%",
+        "fecha": "07-07-2023"
+      },
+      {
+        "id": 10,
+        "moneda": "USD/MXN",
+        "ultimo": "17.1465",
+        "apertura": "17.2280",
+        "maximo": "17.3963",
+        "minimo": "17.0708",
+        "var": "-0.0805",
+        "var_perc": "-0.47%",
+        "fecha": "07-07-2023"
+      }
+    ]
+  }
