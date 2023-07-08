@@ -2,7 +2,8 @@ let ciudad = "Bogotá";
 let diferenciaAnios;
 let edad;
 
-document.getElementById("ciudad").addEventListener("change", function() {
+
+document.getElementById("ciudad").addEventListener("click", function(event) {
   ciudad = this.value || "Bogotá";
   console.log(ciudad);
 });
@@ -20,7 +21,16 @@ document.getElementById("telefono").addEventListener("input", function() {
   }
 });
 
-const calcularEdad = (event) => {
+document.addEventListener("DOMContentLoaded", function() {
+    const datePicker = document.getElementById('datePicker');
+    const fechaActual = new Date(); // Trae la fecha actual
+    fechaActual.setFullYear(fechaActual.getFullYear() - 18); // Resta 18 años
+    fechaActual.setDate(fechaActual.getDate() - 1); // Restar un día adicional para permitir hasta el día anterior al cumpleaños número 18
+    const fechaMaxima = fechaActual.toISOString().split('T')[0]; // Poner la fecha en formato año, mes, dia
+    datePicker.setAttribute('max', fechaMaxima);
+  });
+
+const calcularEdad = (event) => { // Calcula la edad del usuairo en años teniendo en cuenta la fecha de nacimiento ingresada
   const fechaSeleccion = new Date(event.target.value);
   const fechaActual = new Date();
   diferenciaAnios = fechaActual.getFullYear() - fechaSeleccion.getFullYear();
@@ -31,7 +41,7 @@ const calcularEdad = (event) => {
 const datePicker = document.getElementById("datePicker");
 datePicker.addEventListener("change", calcularEdad);
 
-function enviarFormulario(event) {
+function enviarFormulario(event) { // Se trae la información del formulario para efectual el cálculo de cuotas
   event.preventDefault();
 
   let name = document.getElementById("name").value;
@@ -54,23 +64,23 @@ function enviarFormulario(event) {
     console.log(field.name + ": " + field.value);
   });
 
-  let interesMensual = interes / 100 / 12;
+  let interesMensual = interes / 100 / 12; // Se crean als variables necesarias y se hace el cálculo de las cuotas mensuales dependiendo del tipo de crédito solicitado
   let plazos = plazo;
   let cuotaMensual = (monto * interesMensual) / (1 - Math.pow(1 + interesMensual, -plazos));
   cuotaMensual = cuotaMensual.toFixed(2);
 
-  let resultadoCuotas = document.getElementById("resultado");
+  let resultadoCuotas = document.getElementById("resultado"); // Pinta el resultado del cálculo en HTML
   resultadoCuotas.textContent = `${name}, tu cuota mensual es: $${cuotaMensual} a un plazo de ${plazo} meses, con un interés fijo de ${interes}%, recuerda que esta oferta solo es válida para la ciudad de ${ciudad}`;
 
   let resultadoModal = new bootstrap.Modal(document.getElementById("resultadoModal"));
   resultadoModal.show();
 }
 
-const validarEdad = (edad) => {
+const validarEdad = (edad) => { // valida la edad del usuario, si no está dentro del rango se dispara un modal de alerta alerta
   if (edad < 18 || edad > 84) {
     document.getElementById("resultado").textContent = "Debe tener entre 18 y 84 años para solicitar el crédito";
     Swal.fire({
-      icon: 'error',
+      icon: 'warning',
       title: 'Oops...',
       text: 'Debe tener entre 18 y 84 años para solicitar el crédito',
       footer: '<a href="legal.html">Ver términos y condiciones</a>'
@@ -80,48 +90,46 @@ const validarEdad = (edad) => {
   return true;
 };
 
-function validarDocumentoID(documentoID) {
-  // Validate theidentification
+function validarDocumentoID(documentoID) {//Valida el formato de documento
   return /^\d{10}$/.test(documentoID);
 }
 
-function validarEmail(email) {
-  // Validate that the email has the correct format
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+function validarEmail(email) {//Valida el formato de correo
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-const guardarDatos = () => {
+const guardarDatos = () => { //Valida que los datos ingresados para documento y correos ean correctos y lso guarda en local storage
   return new Promise((resolve, reject) => {
     let documentoID = document.getElementById("documentoID").value;
     let email = document.getElementById("email").value;
 
-    // Validation of identification document and email
-    if (!validarDocumentoID(documentoID)) {
+    
+    if (!validarDocumentoID(documentoID)) { //Alerta formato de documento incorrecto
       document.getElementById("resultado").textContent =
         "Por favor ingrese una identificación válida";
       reject("Por favor ingrese una identificación válida");
       return;
     }
 
-    if (!validarEmail(email)) {
+    if (!validarEmail(email)) { //Alerta formato de correo incorrecto
       document.getElementById("resultado").textContent =
         "Por favor ingrese un correo válido";
       reject("Por favor ingrese un correo válido");
       return;
     }
 
-    let storedDocumentoID = localStorage.getItem("documentoID");
-    let storedEmail = localStorage.getItem("email");
+    let storedDocumentoID = localStorage.getItem("documentoID"); //Trae documento del local storage
+    let storedEmail = localStorage.getItem("email");//Trae email en local storage
 
-    if (storedDocumentoID === documentoID && storedEmail === email) {
+    if (storedDocumentoID === documentoID && storedEmail === email) { //Valida que el documento y correo no se encuentren en local storage
       document.getElementById("resultado").textContent =
         "Usted ya ha solicitado un crédito, por favor espere la llamada de nuestro asesor.";
       reject("Usted ya ha solicitado un crédito, por favor espere la llamada de nuestro asesor.");
       return;
     }
 
-    localStorage.setItem("documentoID", documentoID);
-    localStorage.setItem("email", email);
+    localStorage.setItem("documentoID", documentoID); //Guarda documento en local storage
+    localStorage.setItem("email", email);//Guarda email en local storage
     resolve();
   });
 };
@@ -139,8 +147,8 @@ const mensajeExitoso = (event) => {
     if (result.isConfirmed) {
       guardarDatos().then(() => {
         enviarFormulario(event);
-        let resultadoCuotas = document.getElementById("resultado"); // Show result in HTML
-        console.log(resultadoCuotas.textContent); // Show result in the console
+        let resultadoCuotas = document.getElementById("resultado"); // Pinta el resultado en HTML
+        console.log(resultadoCuotas.textContent); // Pinta el resultado en la consola
         
         Swal.fire(
           'Datos enviados',
